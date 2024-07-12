@@ -28,7 +28,7 @@ const Navbar = () => {
           as="li"
           key={index}
           variant="small"
-          className="p-1 font-normal text-gray-900 hover:text-blue-600 transition-colors duration-200 hover:bg-blue-100 rounded-md"
+          className="p-1 font-normal text-gray-500 hover:text-blue-600 transition-colors duration-200 hover:bg-blue-100 rounded-md"
         >
           <Link to={path} className="flex items-center">
             {path === "/" ? "Home" : path === "/allblogs" ? "Blogs" : "Admin Login"}
@@ -42,7 +42,7 @@ const Navbar = () => {
     <>
       <MTNavbar
         className="sticky inset-0 z-20 h-max max-w-full border-none rounded-none py-2 px-4 lg:px-8 lg:py-2"
-        style={{ background: mode === "dark" ? "linear-gradient(90deg, #1e3a8a, #4b5563)" : "linear-gradient(90deg, #f8fafc, #e5e7eb)" }}
+        style={{ background: mode === "dark" ? "linear-gradient(90deg, #030637, #030637)" : "linear-gradient(90deg, #fff, #fff)" }}
       >
         <div className="flex items-center justify-between text-gray-900">
           <Link to={"/"}>
@@ -92,9 +92,9 @@ const Navbar = () => {
                 {mode === "light" ? <MdDarkMode className="w-6 h-6" /> : <MdLightMode className="w-6 h-6" />}
               </IconButton>
             </div>
-            <div>
+            <div className="md:hidden block">
               <IconButton
-                className="ml-auto h-8 w-8 text-inherit shadow rounded-full lg:hidden"
+                className="ml-auto h-8 w-8 text-inherit shadow rounded-full lg:hidden block"
                 ripple={false}
                 onClick={() => setOpenNav(!openNav)}
                 style={{

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
     Card,
     CardHeader,
@@ -12,115 +12,113 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../Firebase/FirebaseConfig";
-import { useEffect } from "react";
+import Layout from "../../Components/Layout/Layout";
+import { FaGoogle, FaFacebookF, FaTwitter } from 'react-icons/fa';
 
 export default function AdminLogin() {
     useEffect(() => {
-        window.scrollTo(0, 0)
- }, [])
+        window.scrollTo(0, 0);
+    }, []);
+
     const context = useContext(myContext);
     const { mode } = context;
-
     const navigate = useNavigate();
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    //* Login Function
     const login = async () => {
         if (!email || !password) {
             return toast.error("All fields are required");
         }
         try {
             const result = await signInWithEmailAndPassword(auth, email, password);
-            toast.success('Login Success');
-            console.log('Login result:', result); // Log the result for debugging
+            toast.success('Login Successful');
             localStorage.setItem('admin', JSON.stringify(result));
             navigate('/');
         } catch (error) {
             toast.error('Login Failed');
-            console.log('Login error:', error); // Log the error for debugging
+            console.log('Login error:', error);
         }
     };
 
     return (
-        <div className="flex justify-center items-center h-screen">
-            {/* Card */}
-            <Card
-                className="w-full max-w-[24rem]"
-                style={{
-                    background: mode === 'dark'
-                        ? 'rgb(30, 41, 59)'
-                        : 'rgb(226, 232, 240)'
-                }}
-            >
-                {/* CardHeader */}
-                <CardHeader
-                    color="blue"
-                    floated={false}
-                    shadow={false}
-                    className="m-0 grid place-items-center rounded-b-none py-8 px-4 text-center"
+        <Layout>
+            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-6">
+                <Button
+                    type="button"
+                    onClick={() => navigate('/')}
+                    className="mb-6 self-start rounded-lg focus:outline-none"
                     style={{
-                        background: mode === 'dark'
-                            ? 'rgb(226, 232, 240)'
-                            : 'rgb(30, 41, 59)'
+                        background: mode === 'dark' ? 'rgb(66, 153, 225)' : 'rgb(30, 41, 59)',
+                        color: 'white'
                     }}
                 >
-                    <div className="mb-4 rounded-full border border-white/10 bg-white/10 p-2 text-white">
-                        <div className=" flex justify-center">
-                            {/* Image */}
-                            <img src="https://cdn-icons-png.flaticon.com/128/727/727399.png" className="h-20 w-20" alt="Admin Icon" />
-                        </div>
-                    </div>
-                    {/* Top Heading */}
-                    <Typography variant="h4" style={{
-                        color: mode === 'dark'
-                            ? 'rgb(30, 41, 59)'
-                            : 'rgb(226, 232, 240)'
-                    }}>
-                        Admin Login
-                    </Typography>
-                </CardHeader>
-                {/* CardBody */}
-                <CardBody>
-                    <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
-                        {/* First Input */}
-                        <div>
+                    Back to Home
+                </Button>
+                <Card
+                    className="w-full max-w-md  rounded-lg"
+                    style={{
+                        background: mode === 'dark' ? 'rgb(45, 55, 72)' : 'white'
+                    }}
+                >
+                    <CardHeader
+                        color="blue"
+                        floated={false}
+                        shadow={false}
+                        className="m-0 grid place-items-center rounded-t-lg py-6 px-4 text-center border-b"
+                        style={{
+                            background: mode === 'dark' ? 'rgb(30, 41, 59)' : 'rgb(240, 242, 245)'
+                        }}
+                    >
+                        <img src="https://cdn.iconscout.com/icon/free/png-512/free-login-1699959-1444434.png?f=webp&w=256" className="h-24 w-24 mb-4" alt="Admin Icon" />
+                        <Typography variant="h4" className="text-gray-900 dark:text-white font-semibold">
+                            Admin Login
+                        </Typography>
+                    </CardHeader>
+                    <CardBody className="p-8">
+                        <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
                             <Input
                                 type="email"
-                                label="Email"
-                                name="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                className="border rounded-lg focus:ring-2 focus:ring-blue-500 placeholder-gray-500 dark:placeholder-gray-400"
+                                placeholder="Enter your email"
+                                required
                             />
-                        </div>
-                        {/* Second Input */}
-                        <div>
                             <Input
                                 type="password"
-                                label="Password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+                                className="border rounded-lg focus:ring-2 focus:ring-blue-500 placeholder-gray-500 dark:placeholder-gray-400"
+                                placeholder="Enter your password"
+                                required
                             />
+                            <Button
+                                type="button"
+                                onClick={login}
+                                className="mt-4 rounded-lg focus:outline-none"
+                                style={{
+                                    background: mode === 'dark' ? 'rgb(66, 153, 225)' : 'rgb(30, 41, 59)',
+                                    color: 'white'
+                                }}
+                            >
+                                Login
+                            </Button>
+                        </form>
+                        <div className="flex justify-around mt-4">
+                            <Button type="button" className="p-2 rounded-full" onClick={() => {/* handle Google login */}}>
+                                <FaGoogle className="text-gray-600 text-xl" />
+                            </Button>
+                            <Button type="button" className="p-2 rounded-full" onClick={() => {/* handle Facebook login */}}>
+                                <FaFacebookF className="text-gray-600 text-xl" />
+                            </Button>
+                            <Button type="button" className="p-2 rounded-full" onClick={() => {/* handle Twitter login */}}>
+                                <FaTwitter className="text-gray-600 text-xl" />
+                            </Button>
                         </div>
-                        {/* Login Button */}
-                        <Button
-                            type="button" // Ensure button type is set to "button"
-                            onClick={login}
-                            style={{
-                                background: mode === 'dark'
-                                    ? 'rgb(226, 232, 240)'
-                                    : 'rgb(30, 41, 59)',
-                                color: mode === 'dark'
-                                    ? 'rgb(30, 41, 59)'
-                                    : 'rgb(226, 232, 240)'
-                            }}
-                        >
-                            Login
-                        </Button>
-                    </form>
-                </CardBody>
-            </Card>
-        </div>
+                    </CardBody>
+                </Card>
+            </div>
+        </Layout>
     );
 }

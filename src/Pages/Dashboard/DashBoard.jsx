@@ -23,31 +23,7 @@ function DashBoard() {
             <div className="py-10">
                 <div
                     className="flex flex-wrap justify-start items-center lg:justify-center gap-2 lg:gap-10 px-4 lg:px-0 mb-8">
-                    <div className="left">
-                        <img
-                            className=" w-40 h-40 object-cover rounded-full border-2 border-pink-600 p-1"
-                            src={'https://cdn-icons-png.flaticon.com/128/3135/3135715.png'} alt="profile"
-                        />
-                    </div>
                     <div className="right">
-                        <h1
-                            className='text-center font-bold text-2xl mb-2'
-                            style={{ color: mode === 'dark' ? 'white' : 'black' }}
-                        >
-                            Kamal Nayan Upadhyay
-                        </h1>
-
-                        <h2
-                            style={{ color: mode === 'dark' ? 'white' : 'black' }} className="font-semibold">
-                            Software Developer
-                        </h2>
-                        <h2
-                            style={{ color: mode === 'dark' ? 'white' : 'black' }} className="font-semibold">knupadhyay784@gmail.com
-                        </h2>
-                        <h2
-                            style={{ color: mode === 'dark' ? 'white' : 'black' }} className="font-semibold">
-                            <span>Total Blog : </span>  15
-                        </h2>
                         <div className="flex gap-2 mt-2">
                             <Link to={'/createblog'}>
                                 <div className="mb-2">
@@ -134,8 +110,8 @@ function DashBoard() {
                                                     </td>
 
                                                     {/* Blog Thumbnail */}
-                                                    <th style={{ color: mode === 'dark' ? 'white' : 'black' }} scope="row" className="px-6 py-4 font-medium">
-                                                        <img className='w-16 rounded-lg' src={thumbnail} alt="thumbnail" />
+                                                    <th style={{ color: mode === 'dark' ? 'white' : 'black' }} scope="row" className="px-8 py-4 font-medium">
+                                                        <img className='w-24 rounded' src={thumbnail} alt="thumbnail" />
                                                     </th>
 
                                                     {/* Blog Title */}
@@ -156,7 +132,7 @@ function DashBoard() {
                                                     {/* Delete Blog */}
                                                     <td style={{ color: mode === 'dark' ? 'white' : 'black' }} className="px-6 py-4">
                                                         <button
-                                                        onClick={()=>deleteBlogs(id)} className='px-4 py-1 rounded-lg text-white font-bold bg-red-500'>
+                                                        onClick={()=>deleteBlogs(id)} className='px-6 py-2 rounded text-white font-bold bg-gray-800'>
                                                             Delete
                                                         </button>
                                                     </td>
