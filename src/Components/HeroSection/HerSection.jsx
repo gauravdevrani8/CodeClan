@@ -1,7 +1,7 @@
 import { Typography } from '@material-tailwind/react';
 import React, { useContext } from 'react';
 import myContext from '../../Context/Data/MyContext';
-import backgroundImage from '../../assets/bg.jpg'; // Update with your actual image path
+import backgroundImage from '../../assets/bg.jpg'; 
 
 function HeroSection() {
     const context = useContext(myContext);
