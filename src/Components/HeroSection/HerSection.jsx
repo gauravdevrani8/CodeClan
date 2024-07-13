@@ -1,11 +1,19 @@
 import { Typography } from '@material-tailwind/react';
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import myContext from '../../Context/Data/MyContext';
 import backgroundImage from '../../assets/bg.jpg'; 
 
 function HeroSection() {
     const context = useContext(myContext);
     const { mode } = context;
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 1000); // Adjust the duration as needed
+        return () => clearTimeout(timer);
+    }, []);
 
     return (
         <section className="relative py-24">
@@ -14,11 +22,11 @@ function HeroSection() {
                     backgroundImage: `url(${backgroundImage})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    backgroundColor: mode === 'dark' ? 'rgb(30, 41, 59)' : '#30336b',
+                    backgroundColor: loading ? 'rgba(243, 243, 243, 0.8)' : (mode === 'dark' ? 'rgb(30, 41, 59)' : '#30336b'),
                 }}
-                className="absolute inset-0"
+                className={`absolute inset-0 transition duration-300 ${loading ? 'backdrop-blur-md' : ''}`}
             />
-            <div className="bg-black bg-opacity-20 absolute inset-0" /> 
+            <div className={`bg-black bg-opacity-20 absolute inset-0 transition duration-300 ${loading ? 'backdrop-blur-md' : ''}`} />
             <div className="container mx-auto relative flex flex-col items-center justify-center text-center">
                 {/* Main Content */}
                 <div className="mb-8">
