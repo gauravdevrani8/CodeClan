@@ -8,9 +8,9 @@ import {
 } from "@material-tailwind/react";
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaCode } from "react-icons/fa"; // Code icon
-import { MdDarkMode, MdLightMode } from "react-icons/md"; // Light and dark mode icons
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai"; // Menu and Close icons
+import { FaCode } from "react-icons/fa"; 
+import { MdDarkMode, MdLightMode } from "react-icons/md"; 
+import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai"; 
 import myContext from "../../Context/Data/MyContext";
 import ShareDialogBox from "../ShareDialogBox/ShareDialogBox";
 
