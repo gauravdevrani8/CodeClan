@@ -156,7 +156,7 @@ function CreateBlog() {
 
                 {/* Editor */}
                 <Editor
-                    apiKey='7kr3x42tj1ajy0nrrkqw16ly2ijzpt2fiauthi6hf1ms549s'
+                    apiKey={import.meta.env.VITE_TINY_MCE_API_KEY}
                     onEditorChange={(newValue, editor) => {
                         setBlogs({ ...blogs, content: newValue });
                     }}
