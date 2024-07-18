@@ -23,21 +23,32 @@ const Navbar = () => {
 
   const navList = (
     <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      {["/", "/allblogs", "/adminlogin"].map((path, index) => (
+      {["/", "/allblogs"].map((path, index) => (
         <Typography
           as="li"
           key={index}
           variant="small"
-          className="p-1 font-normal text-gray-500 hover:text-blue-600 transition-colors duration-200 hover:bg-blue-100 rounded-md"
+          className="p-1 font-normal text-gray-500 hover:text-blue-600 transition-colors duration-200 rounded-md"
         >
           <Link to={path} className="flex items-center">
-            {path === "/" ? "Home" : path === "/allblogs" ? "Blogs" : "Admin Login"}
+            {path === "/" ? "Home" : "Blogs"}
           </Link>
         </Typography>
       ))}
+      {!admin && (
+        <Typography
+          as="li"
+          variant="small"
+          className="p-1 font-normal text-gray-500 hover:text-blue-600 transition-colors duration-200 rounded-md"
+        >
+          <Link to="/adminlogin" className="flex items-center">
+            Admin Login
+          </Link>
+        </Typography>
+      )}
     </ul>
   );
-
+  
   return (
     <>
       <MTNavbar
